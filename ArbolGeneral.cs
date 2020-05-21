@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace tp3
+namespace tp1
 {
 	public class ArbolGeneral<T>
 	{
 		
 		private NodoGeneral<T> raiz;
+		public int alt;
 
 		public ArbolGeneral(T dato) {
 			this.raiz = new NodoGeneral<T>(dato);
@@ -49,13 +50,138 @@ namespace tp3
 		}
 	
 		public int altura() {
-			return 0;
+			int altMax=0;
+			if (this.esHoja()){
+                return 0;
+            }
+            else {
+				foreach (var element in this.getHijos())	{
+					altMax=Math.Max(altMax, element.altura());
+                   	element.altura();
+            		}
+			}
+			return  altMax+1;
 		}
 	
 		
-		public int nivel(T dato) {
-			return 0;
+		public void preorden(){
+			if (!this.esVacio()){
+				Console.Write(this.getDatoRaiz() + " ");
+				if (!this.esHoja()){
+				foreach (var hijo in this.getHijos()){
+					hijo.preorden();
+					}
+				}
+			}
+		}
+		
+		public void postorden(){
+			if (!this.esVacio()){
+				foreach (var hijo in this.getHijos()){
+					hijo.postorden();
+				}
+				Console.Write(this.getDatoRaiz() + " ");
+			}
+		}
+		
+		public void porniveles(){
+			Cola<ArbolGeneral<T>> cola=new Cola<ArbolGeneral<T>>();
+			ArbolGeneral<T> temp;
+			cola.encolar(this);
+			if (!this.esVacio()){
+				while(!cola.esVacia()){
+					temp=cola.desencolar();
+					Console.Write(temp.getDatoRaiz() + " ");
+					foreach (var hijo in temp.getHijos())
+							cola.encolar(hijo);
+				}
+			}
+		}
+		
+		public void niveles(int a, int b){
+
+			Cola<ArbolGeneral<T>> cola=new Cola<ArbolGeneral<T>>();
+			ArbolGeneral<T> temp;
+			int contNivel=0;
+			cola.encolar(this);
+			cola.encolar(null);
+	
+			while(!cola.esVacia()){
+				temp=cola.desencolar();
+				if (temp != null){
+					if (contNivel >= a && contNivel <= b)
+						Console.Write(temp.getDatoRaiz() + " ");
+					foreach (var hijo in temp.getHijos()){
+						cola.encolar(hijo);
+					}
+				}
+				else{
+					contNivel++;
+					if (!cola.esVacia())
+						cola.encolar(null);
+				}
+			}
+		}
+	
+		public int nivel(T dato){
+			
+			Cola<ArbolGeneral<T>> cola=new Cola<ArbolGeneral<T>>();
+			ArbolGeneral<T> temp;
+			int contNivel=0;
+			//string data= dato.ToString();
+			cola.encolar(this);
+			cola.encolar(null);
+	
+			while(!cola.esVacia()){
+				temp=cola.desencolar();
+				
+				if (temp != null){
+					//string tempDato= temp.getDatoRaiz().ToString();
+					if (temp.getDatoRaiz().Equals(dato))
+						return contNivel;
+					foreach (var hijo in temp.getHijos()){
+						cola.encolar(hijo);
+					}
+				}
+				else{
+					contNivel++;
+					if (!cola.esVacia())
+						cola.encolar(null);
+				}
+			}
+			return -1;
+		}
+		
+		public int ancho(){
+
+			Cola<ArbolGeneral<T>> cola=new Cola<ArbolGeneral<T>>();
+			ArbolGeneral<T> temp;
+			//int contNivel=0;
+			int anchoNivel=0;
+			int anchura=0;
+			cola.encolar(this);
+			cola.encolar(null);
+	
+			while(!cola.esVacia()){
+				temp=cola.desencolar();
+				if (temp != null){
+					anchoNivel++;
+					foreach (var hijo in temp.getHijos()){
+						cola.encolar(hijo);
+					}
+				}
+				else{
+					//contNivel++;
+					if (anchoNivel > anchura)
+						anchura=anchoNivel;
+					anchoNivel=0;
+					if (!cola.esVacia())
+						cola.encolar(null);
+				}
+			}
+			return anchura;
 		}
 	
 	}
+
 }

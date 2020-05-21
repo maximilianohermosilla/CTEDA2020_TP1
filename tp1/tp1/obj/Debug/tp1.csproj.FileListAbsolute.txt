@@ -1,0 +1,6 @@
+C:\Users\maxim\Documents\SharpDevelop Projects\tp1\tp1\bin\Debug\tp1.exe.config
+C:\Users\maxim\Documents\SharpDevelop Projects\tp1\tp1\bin\Debug\tp1.exe
+C:\Users\maxim\Documents\SharpDevelop Projects\tp1\tp1\bin\Debug\tp1.pdb
+C:\Users\maxim\Documents\SharpDevelop Projects\tp1\tp1\obj\Debug\tp1.csprojResolveAssemblyReference.cache
+C:\Users\maxim\Documents\SharpDevelop Projects\tp1\tp1\obj\Debug\tp1.exe
+C:\Users\maxim\Documents\SharpDevelop Projects\tp1\tp1\obj\Debug\tp1.pdb

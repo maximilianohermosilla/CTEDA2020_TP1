@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace tp3
+namespace tp1
 {
 	/// <summary>
 	/// Description of NodoGeneral.
